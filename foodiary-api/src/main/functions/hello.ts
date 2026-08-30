@@ -1,6 +1,6 @@
-import { HelloControler } from "../../application/controllers/HelloControler";
+import { HelloController } from '../../application/controllers/HelloController';
 import { lambdaHttpAdapter } from '../adapters/lambdaHttpAdapter';
 
-const controller = new HelloControler();
+const controller = new HelloController();
 
 export const handler = lambdaHttpAdapter(controller);
