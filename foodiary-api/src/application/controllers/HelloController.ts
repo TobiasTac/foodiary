@@ -1,5 +1,5 @@
-import z from "zod";
-import { IController } from "../contracts/Controller";
+import * as z from "zod";
+import { Controller } from "../contracts/Controller";
 
 const schema = z.object({
   account: z.object({
@@ -8,8 +8,9 @@ const schema = z.object({
   email: z.email('Invalid email').min(1, 'Email is required'),
 });
 
-export class HelloController implements IController<unknown> {
-  async handle(request: IController.Request): Promise<IController.Response<unknown>> {
+
+export class HelloController extends Controller<unknown> {
+  async handle(request: Controller.Request): Promise<Controller.Response<unknown>> {
     const parsedBody = schema.parse(request.body);
 
     return {
