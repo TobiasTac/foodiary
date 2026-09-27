@@ -1,9 +1,9 @@
-import { Controller } from "../contracts/Controller";
-import { HelloBody, helloSchema } from "./schemas/hello.schema";
+import { Schema } from '../../kernel/decorator/schema';
+import { Controller } from '../contracts/Controller';
+import { HelloBody, helloSchema } from './schemas/hello.schema';
 
+@Schema(helloSchema)
 export class HelloController extends Controller<unknown> {
-  protected override schema = helloSchema;
-
   protected override async handle(
     request: Controller.Request<HelloBody>,
   ): Promise<Controller.Response<unknown>> {
@@ -11,7 +11,7 @@ export class HelloController extends Controller<unknown> {
       statusCode: 200,
       body: {
         parsedBody: request.body,
-      }
+      },
     };
   }
 }
