@@ -16,7 +16,7 @@ export abstract class Controller<TBody = undefined> {
 
   private validateBody(body: unknown): TBody {
     if (!this.schema) {
-      return body as TBody
+      return body as TBody;
     }
 
     return this.schema.parse(body) as TBody;

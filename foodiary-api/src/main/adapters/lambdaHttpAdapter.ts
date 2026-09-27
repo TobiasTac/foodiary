@@ -1,7 +1,7 @@
-import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda";
-import { ZodError } from "zod";
-import { Controller } from "../../application/contracts/Controller";
-import { lambdaBodyParser } from "../utils/lambdaBodyParser";
+import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
+import { ZodError } from 'zod';
+import { Controller } from '../../application/contracts/Controller';
+import { lambdaBodyParser } from '../utils/lambdaBodyParser';
 
 export function lambdaHttpAdapter(controller: Controller<unknown>) {
   return async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> => {
@@ -19,7 +19,7 @@ export function lambdaHttpAdapter(controller: Controller<unknown>) {
       return {
         statusCode: response.statusCode,
         body: response.body ? JSON.stringify(response.body) : undefined,
-      }
+      };
     } catch (error) {
       if (error instanceof ZodError) {
         return {
@@ -32,8 +32,8 @@ export function lambdaHttpAdapter(controller: Controller<unknown>) {
                 error: issue.message,
               })),
             },
-          })
-        }
+          }),
+        };
       }
 
       return {
@@ -42,9 +42,9 @@ export function lambdaHttpAdapter(controller: Controller<unknown>) {
           error: {
             code: 'INTERNAL_SERVER_ERROR',
             message: 'Internal Server Error.',
-          }
-        },)
-      }
+          },
+        }),
+      };
     }
-  }
+  };
 }

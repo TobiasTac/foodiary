@@ -5,6 +5,14 @@ import tseslint from 'typescript-eslint';
 
 export default defineConfig([
   {
+    ignores: [
+      '.serverless/**',
+      'dist/**',
+      'node_modules/**',
+      'coverage/**',
+    ],
+  },
+  {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
     plugins: { js },
     extends: ['js/recommended'],

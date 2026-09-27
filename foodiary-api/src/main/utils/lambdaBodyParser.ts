@@ -1,4 +1,4 @@
-import { APIGatewayProxyEventV2 } from "aws-lambda";
+import { APIGatewayProxyEventV2 } from 'aws-lambda';
 
 export function lambdaBodyParser(body: APIGatewayProxyEventV2['body']) {
   try {
