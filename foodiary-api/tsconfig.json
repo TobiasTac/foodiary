@@ -16,5 +16,7 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "noImplicitOverride": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
   }
 }
