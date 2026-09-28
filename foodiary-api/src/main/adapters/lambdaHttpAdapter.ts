@@ -1,7 +1,10 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 import { ZodError } from 'zod';
 import { Controller } from '../../application/contracts/Controller';
+import { ErrorCode } from '../../application/errors/ErrorCode';
+import { HttpError } from '../../application/errors/http/HttpError';
 import { lambdaBodyParser } from '../utils/lambdaBodyParser';
+import { lambdaErrorResponse } from '../utils/lambdaErrorResponse';
 
 export function lambdaHttpAdapter(controller: Controller<unknown>) {
   return async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> => {
@@ -22,29 +25,25 @@ export function lambdaHttpAdapter(controller: Controller<unknown>) {
       };
     } catch (error) {
       if (error instanceof ZodError) {
-        return {
+        return lambdaErrorResponse({
           statusCode: 400,
-          body: JSON.stringify({
-            error: {
-              code: 'VALIDATION',
-              message: error.issues.map(issue => ({
-                field: issue.path.join('.'),
-                error: issue.message,
-              })),
-            },
-          }),
-        };
+          code: ErrorCode.VALIDATION,
+          message: error.issues.map(issue => ({
+            field: issue.path.join('.'),
+            error: issue.message,
+          })),
+        });
       }
 
-      return {
+      if (error instanceof HttpError) {
+        return lambdaErrorResponse(error);
+      }
+
+      return lambdaErrorResponse({
         statusCode: 500,
-        body: JSON.stringify({
-          error: {
-            code: 'INTERNAL_SERVER_ERROR',
-            message: 'Internal Server Error.',
-          },
-        }),
-      };
+        code: ErrorCode.INTERNAL_SERVER_ERROR,
+        message: 'Internal Server Error.',
+      });
     }
   };
 }
