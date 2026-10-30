@@ -1,4 +1,4 @@
-import { getSchema } from '../../kernel/decorator/schema';
+import { getSchema } from "@kernel/decorator/schema";
 
 export abstract class Controller<TBody = undefined> {
 
@@ -15,7 +15,7 @@ export abstract class Controller<TBody = undefined> {
 
   private validateBody(body: unknown): TBody {
     const schema = getSchema(this);
-    
+
     if (!schema) {
       return body as TBody;
     }

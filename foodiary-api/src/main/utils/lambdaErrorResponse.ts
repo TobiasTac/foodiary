@@ -1,4 +1,4 @@
-import { ErrorCode } from '../../application/errors/ErrorCode';
+import { ErrorCode } from "@application/errors/ErrorCode";
 
 interface ILambdaHttpResponseParams {
   statusCode: number;
@@ -7,8 +7,8 @@ interface ILambdaHttpResponseParams {
 }
 
 export function lambdaErrorResponse({
-  code, 
-  message, 
+  code,
+  message,
   statusCode,
 }: ILambdaHttpResponseParams) {
   return {
