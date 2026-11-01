@@ -6,6 +6,7 @@ provider:
   region: sa-east-1
   runtime: nodejs24.x
   memorySize: 128
+  stage: ${opt:stage, 'dev'}
   architecture: arm64
 
 package:
@@ -22,3 +23,6 @@ functions:
       - httpApi:
           path: /hello/{id}
           method: POST
+
+resources:
+  - ${file(./sls/resources/UserPool.yml)}
