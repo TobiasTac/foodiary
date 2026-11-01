@@ -19,7 +19,7 @@ export class Registry {
     const token = impl.name;
 
     if (this.providers.has(token)) {
-      throw new Error(`"${token}" is already register in the registry`);
+      throw new Error(`"${token}" is already registered in the registry`);
     }
 
     const deps = Reflect.getMetadata('design:paramtypes', impl) ?? [];
