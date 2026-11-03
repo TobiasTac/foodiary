@@ -1,10 +1,10 @@
-import { getSchema } from "@kernel/decorator/schema";
+import { getSchema } from '@kernel/decorator/schema';
 
-export abstract class Controller<TBody = undefined> {
+export abstract class Controller<TBody = undefined, TResponse = undefined> {
 
-  protected abstract handle(request: Controller.Request<TBody>): Promise<Controller.Response<TBody>>;
+  protected abstract handle(request: Controller.Request<TBody>): Promise<Controller.Response<TResponse>>;
 
-  public execute(request: Controller.Request): Promise<Controller.Response<TBody>> {
+  public execute(request: Controller.Request): Promise<Controller.Response<TResponse>> {
     const body = this.validateBody(request.body);
 
     return this.handle({

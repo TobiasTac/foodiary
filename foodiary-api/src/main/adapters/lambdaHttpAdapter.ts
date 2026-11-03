@@ -7,7 +7,7 @@ import { HttpError } from '@application/errors/http/HttpError';
 import { lambdaBodyParser } from '@main/utils/lambdaBodyParser';
 import { lambdaErrorResponse } from '@main/utils/lambdaErrorResponse';
 
-export function lambdaHttpAdapter(controller: Controller<unknown>) {
+export function lambdaHttpAdapter(controller: Controller<unknown, unknown>) {
   return async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> => {
     try {
       const body = lambdaBodyParser(event.body);
