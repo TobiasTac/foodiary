@@ -60,7 +60,7 @@ export class AuthGateway {
   private getSecretHash(email: string): string {
     const { id, secret } = this.appConfig.auth.cognito.client;
     
-    return createHmac('SHA_256', secret)
+    return createHmac('SHA256', secret)
       .update(`${email}${id}`)
       .digest('base64');
   }
