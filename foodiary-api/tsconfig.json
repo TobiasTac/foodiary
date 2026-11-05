@@ -32,6 +32,9 @@
       ],
       "@shared/*": [
         "./src/shared/*"
+      ],
+      "@infra/*": [
+        "./src/infra/*"
       ]
     }
   }
