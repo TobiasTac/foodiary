@@ -1,11 +1,21 @@
+import { AuthGateway } from '@infra/gateways/AuthGateway';
 import { Injectable } from '@kernel/decorator/injectable';
 
 @Injectable()
 export class SignUpUseCase {
-  async execute(input: SignUpUseCase.Input): Promise<SignUpUseCase.Output> {
+  constructor(private readonly authGateway: AuthGateway) {}
+
+  async execute({
+    email,
+    password,
+  }: SignUpUseCase.Input): Promise<SignUpUseCase.Output> {
+    await this.authGateway.signUp({ email, password }); 
+
+    const { accessToken, refreshToken } = await this.authGateway.signIn({ email, password });
+
     return {
-      accessToken: 'access token gerado...',
-      refreshToken: 'refresh token gerado...',
+      accessToken,
+      refreshToken,
     };
   }
 }
