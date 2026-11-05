@@ -6,8 +6,9 @@ provider:
   region: sa-east-1
   runtime: nodejs24.x
   memorySize: 128
-  stage: ${opt:stage, 'dev'}
   architecture: arm64
+  stage: ${opt:stage, 'dev'}
+  environment: ${file(./sls/config/env.yml)}
 
 package:
   individually: true
