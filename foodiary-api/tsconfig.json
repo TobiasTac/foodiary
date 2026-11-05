@@ -2,7 +2,9 @@
   "compilerOptions": {
     "module": "nodenext",
     "target": "esnext",
-    "types": [],
+    "types": [
+      "node"
+    ],
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
@@ -15,7 +17,7 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-    "noImplicitOverride": false,
+    "noImplicitOverride": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "paths": {
