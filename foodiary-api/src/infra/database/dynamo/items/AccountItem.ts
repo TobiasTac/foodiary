@@ -23,8 +23,13 @@ export class AccountItem {
   }
 
   static fromEntity(account: Account) {
+    if (!account.externalId) {
+      throw new Error(`Account "${account.id}" cannot be persisted without an externalId.`);
+    }
+
     return new AccountItem({
       ...account,
+      externalId: account.externalId,
       createdAt: account.createdAt.toISOString(),
     });
   }
