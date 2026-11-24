@@ -1,4 +1,4 @@
-import { getSchema } from '@kernel/decorator/schema';
+import { getSchema } from '@kernel/decorator/Schema';
 
 export abstract class Controller<TBody = undefined, TResponse = undefined> {
 

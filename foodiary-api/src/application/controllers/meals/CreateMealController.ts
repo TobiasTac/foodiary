@@ -1,5 +1,5 @@
 import { Controller } from '@application/contracts/Controller';
-import { Injectable } from '@kernel/decorator/injectable';
+import { Injectable } from '@kernel/decorator/Injectable';
 import KSUID from 'ksuid';
 
 @Injectable()

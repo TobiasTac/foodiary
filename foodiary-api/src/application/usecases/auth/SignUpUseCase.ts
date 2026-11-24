@@ -2,7 +2,7 @@ import { Account } from '@application/entities/Account';
 import { EmailAlreadyInUse } from '@application/errors/application/EmailAlreadyInUse';
 import { AccountRepository } from '@infra/database/dynamo/repositories/AccountRepository';
 import { AuthGateway } from '@infra/gateways/AuthGateway';
-import { Injectable } from '@kernel/decorator/injectable';
+import { Injectable } from '@kernel/decorator/Injectable';
 
 @Injectable()
 export class SignUpUseCase {

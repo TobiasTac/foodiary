@@ -1,6 +1,6 @@
 import { InitiateAuthCommand, SignUpCommand } from '@aws-sdk/client-cognito-identity-provider';
 import { cognitoClient } from '@infra/clients/cognitoClient';
-import { Injectable } from '@kernel/decorator/injectable';
+import { Injectable } from '@kernel/decorator/Injectable';
 import { AppConfig } from '@shared/config/AppConfig';
 import { createHmac } from 'node:crypto';
 

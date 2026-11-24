@@ -1,7 +1,7 @@
 import { NotAuthorizedException, UserNotFoundException } from '@aws-sdk/client-cognito-identity-provider';
 import { InvalidCredentials } from '@application/errors/application/InvalidCredentials';
 import { AuthGateway } from '@infra/gateways/AuthGateway';
-import { Injectable } from '@kernel/decorator/injectable';
+import { Injectable } from '@kernel/decorator/Injectable';
 
 @Injectable()
 export class SignInUseCase {

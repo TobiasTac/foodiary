@@ -1,7 +1,7 @@
 import { Controller } from '@application/contracts/Controller';
 import { SignUpUseCase } from '@application/usecases/auth/SignUpUseCase';
-import { Injectable } from '@kernel/decorator/injectable';
-import { Schema } from '@kernel/decorator/schema';
+import { Injectable } from '@kernel/decorator/Injectable';
+import { Schema } from '@kernel/decorator/Schema';
 import { SignUpBody, signUpSchema } from './schemas/signUpSchema';
 
 @Injectable()
