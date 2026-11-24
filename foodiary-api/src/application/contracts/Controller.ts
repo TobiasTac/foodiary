@@ -1,31 +1,32 @@
 import { getSchema } from '@kernel/decorator/Schema';
 
-export abstract class Controller<TBody = undefined, TResponse = undefined> {
+type TRouteType = 'public' | 'private';
 
-  protected abstract handle(request: Controller.Request<TBody>): Promise<Controller.Response<TResponse>>;
+export abstract class Controller<TType extends TRouteType, TBody = undefined> {
+  protected abstract handle(request: Controller.Request<TType>): Promise<Controller.Response<TBody>>;
 
-  public execute(request: Controller.Request): Promise<Controller.Response<TResponse>> {
+  public execute(request: Controller.Request<TType>): Promise<Controller.Response<TBody>> {
     const body = this.validateBody(request.body);
 
     return this.handle({
       ...request,
       body,
-    } as Controller.Request<TBody>);
+    });
   }
 
-  private validateBody(body: unknown): TBody {
+  private validateBody(body: Controller.Request<TType>['body']) {
     const schema = getSchema(this);
 
     if (!schema) {
-      return body as TBody;
+      return body;
     }
 
-    return schema.parse(body) as TBody;
+    return schema.parse(body);
   }
 }
 
 export namespace Controller {
-  export type Request<
+  type BaseRequest<
     TBody = Record<string, unknown>,
     TParams = Record<string, unknown>,
     TQueryParams = Record<string, unknown>,
@@ -34,6 +35,31 @@ export namespace Controller {
     params: TParams;
     queryParams: TQueryParams;
   };
+
+  type PublicRequest<
+    TBody = Record<string, unknown>,
+    TParams = Record<string, unknown>,
+    TQueryParams = Record<string, unknown>,
+  > = BaseRequest<TBody, TParams, TQueryParams> & {
+    accountId: null;
+  };
+
+  type PrivateRequest<
+    TBody = Record<string, unknown>,
+    TParams = Record<string, unknown>,
+    TQueryParams = Record<string, unknown>,
+  > = BaseRequest<TBody, TParams, TQueryParams> & {
+    accountId: string;
+  };
+
+  export type Request<
+    TType extends TRouteType,
+    TBody = Record<string, unknown>,
+    TParams = Record<string, unknown>,
+    TQueryParams = Record<string, unknown>,
+  > = TType extends 'public'
+        ? PublicRequest<TBody, TParams, TQueryParams>
+        : PrivateRequest<TBody, TParams, TQueryParams>;
 
   export type Response<TBody = undefined> = {
     statusCode: number;
