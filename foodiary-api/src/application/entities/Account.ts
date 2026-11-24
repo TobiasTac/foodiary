@@ -22,6 +22,6 @@ export namespace Account {
     email: string;
     externalId?: string;
     id?: string;
-    createdAt?: Date; 
+    createdAt?: Date;
   };
 }

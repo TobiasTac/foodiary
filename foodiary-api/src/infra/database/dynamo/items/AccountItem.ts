@@ -15,7 +15,7 @@ export class AccountItem {
   }
 
   toItem(): AccountItem.ItemType {
-    return  {
+    return {
       ...this.keys,
       ...this.attrs,
       type: this.type,
@@ -66,7 +66,7 @@ export namespace AccountItem {
     SK: `ACCOUNT#${string}`;
     GSI1PK: `ACCOUNT#${string}`;
     GSI1SK: `ACCOUNT#${string}`;
-  }
+  };
 
   export type Attributes = {
     id: string;
