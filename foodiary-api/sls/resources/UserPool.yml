@@ -40,4 +40,4 @@ Resources:
       AccessTokenValidity: 12
       RefreshTokenRotation:
         Feature: ENABLED
-        RetryGracePeriodSeconds: 10
+        RetryGracePeriodSeconds: 0
