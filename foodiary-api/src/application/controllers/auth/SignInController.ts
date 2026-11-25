@@ -1,18 +1,18 @@
 import { Controller } from '@application/contracts/Controller';
 import { SignInUseCase } from '@application/usecases/auth/SignInUseCase';
-import { Injectable } from '@kernel/decorator/injectable';
-import { Schema } from '@kernel/decorator/schema';
+import { Injectable } from '@kernel/decorator/Injectable';
+import { Schema } from '@kernel/decorator/Schema';
 import { SignInBody, signInSchema } from './schemas/signInSchema';
 
 @Injectable()
 @Schema(signInSchema)
-export class SignInController extends Controller<SignInBody, SignInController.Response> {
+export class SignInController extends Controller<'public', SignInController.Response> {
   constructor(private readonly signInUseCase: SignInUseCase) {
     super();
   }
 
   protected override async handle(
-    { body }: Controller.Request<SignInBody>,
+    { body }: Controller.Request<'public', SignInBody>,
   ): Promise<Controller.Response<SignInController.Response>> {
     const { email, password } = body;
 

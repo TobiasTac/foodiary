@@ -1,4 +1,4 @@
-import { Injectable } from '@kernel/decorator/injectable';
+import { Injectable } from '@kernel/decorator/Injectable';
 import { env } from './env';
 
 @Injectable()

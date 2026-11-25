@@ -1,7 +1,7 @@
 import { Account } from '@application/entities/Account';
 
 export class AccountItem {
-  private readonly type = 'Account';
+  static readonly type = 'Account';
 
   private readonly keys: AccountItem.Keys;
 
@@ -15,21 +15,16 @@ export class AccountItem {
   }
 
   toItem(): AccountItem.ItemType {
-    return  {
+    return {
       ...this.keys,
       ...this.attrs,
-      type: this.type,
+      type: AccountItem.type,
     };
   }
 
   static fromEntity(account: Account) {
-    if (!account.externalId) {
-      throw new Error(`Account "${account.id}" cannot be persisted without an externalId.`);
-    }
-
     return new AccountItem({
       ...account,
-      externalId: account.externalId,
       createdAt: account.createdAt.toISOString(),
     });
   }
@@ -66,12 +61,12 @@ export namespace AccountItem {
     SK: `ACCOUNT#${string}`;
     GSI1PK: `ACCOUNT#${string}`;
     GSI1SK: `ACCOUNT#${string}`;
-  }
+  };
 
   export type Attributes = {
     id: string;
     email: string;
-    externalId: string;
+    externalId: string | undefined;
     createdAt: string;
   };
 

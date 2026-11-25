@@ -1,0 +1,17 @@
+name: Bella Reviewer
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  pull_request_review_comment:
+    types: [created]
+
+jobs:
+  bella-review:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - uses: Natan-Lucena/bella-review-action@v1
+        with:
+          bella-token: ${{ secrets.BELLA_TOKEN }}
