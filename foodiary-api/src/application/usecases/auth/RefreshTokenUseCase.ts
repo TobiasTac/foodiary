@@ -35,11 +35,10 @@ export class RefreshTokenUseCase {
 export namespace RefreshTokenUseCase {
   export type Input = {
     refreshToken: string;
-
-  }
+  };
 
   export type Output = {
     accessToken: string;
     refreshToken: string;
-  }
+  };
 }
